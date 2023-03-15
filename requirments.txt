@@ -1,0 +1,10 @@
+torch >= 1.10.0
+yacs
+pandas
+tensorboardX
+scikit-learn
+einops
+loguru
+tqdm
+torchvision
+matplotlib

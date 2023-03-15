@@ -1,0 +1,112 @@
+# ====================
+# environment
+# ====================
+env:
+  # relative path to the directory for this experiment
+  exp_name: 'base_pcm'
+  # bool flag for whether or not to use CUDA
+  use_cuda: True
+  # CUDA device id, only when use_cuda == True, only single GPU is supported
+  cuda_id: '0'
+  # fixed random seed
+  seed: 142
+
+# ====================
+# agent
+# ====================
+agent:
+  # specifie agent to run
+  agent_name: 'exp_agent'
+  # run agent with 'train' or 'valid' mode
+  # train mode: train model, choose madel based on val set, and run test set every epoch.
+  # valid mode: just inference the model.
+  mode: 'train'
+
+# ====================
+# checkpoint
+# ====================
+ckpt:
+  # file name for saving checkpoint, best model will prefix with 'best_'
+  save_interval: 10
+  last_ckpt_path: 'latest_ckpt.pth'
+  ckpt_name: 'latest_ckpt.pth'
+
+# ====================
+# model config
+# ====================
+model:
+  # Positional Correct Module
+  offset:
+    name: 'Mixer'
+    dim: 4
+    depth: 2
+    dropout: 0.
+  # Dist Transform Module
+  dist:
+    name: 'DistModule'
+
+# ====================
+# data source config
+# ====================
+data:
+  # bool flag for whether or not to shuffle training set
+  shuffle: True
+  # number of samples for each mini-batch for training
+  batch_size: 128
+  # number of samples for each mini-batch for validation
+  valid_batch_size: 128
+  # number of samples for each mini-batch for test
+  test_batch_size: 128
+  # try to use pin_memory, but if system freeze or swap being used a lot, disable it.
+  pin_memory: False
+  # bool flag for whether or not to drop the last batch if no enough samples left
+  drop_last: False
+  norm_rad: True
+
+  train:
+    root: 'data/352_train'
+    name: 'Drone_train'
+    index_dir: 'data/train_no_prefix.txt'
+    npy_path: 'data/train.npy'
+  val:
+    root: 'data/352_val'
+    name: 'Drone_val'
+    index_dir: 'data/val_no_prefix.txt'
+    npy_path: 'data/val.npy'
+  test:
+    root: 'data/352_test'
+    name: 'Drone_test'
+    index_dir: 'data/test_no_prefix.txt'
+    npy_path: 'data/test.npy'
+
+# ====================
+# optimizer config
+# ====================
+optimizer:
+  # maximum number of epoch to run
+  max_epoch: 10000
+
+  # ====================
+  # SGD optimizer
+  # ====================
+  optimizer_name: 'sgd'
+  lr: 0.001
+  momentum: 0.9
+  weight_decay: 0.001
+
+  # Grad Norm Clip
+  clip_grad:
+    is_clip: True
+    max_grad_norm: 1.0
+  # ====================
+  # Learning rate schedule
+  # ====================
+  lr_scheduler:
+    lr_scheduler_name: 'warmup_cos'
+    warmup_steps: 500
+# ====================
+# Loss criterion
+# ====================
+loss:
+  loss_name: 'mse'
+  reduction: 'mean'
