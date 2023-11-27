@@ -1,6 +1,6 @@
-# Why does Stereo Triangulation Not Work in UAV Distance Estimation
+# Revisting Stereo Triangulation in UAV Distance Estimation
 
-This repository is the official implementation of "Why does Stereo Triangulation Not Work in UAV Distance Estimation". It is designed for efficient UAV target distance estimation.
+This repository is the official implementation of "Revisting Stereo Triangulation in UAV Distance Estimation". It is designed for efficient UAV target distance estimation.
 
 [Paper](https://arxiv.org/abs/2306.08939) | [Project Page](https://duanyuan13.github.io/UAVDE.html) | [YouTube]() | [BibeTex](#citation)
 
