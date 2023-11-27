@@ -4,7 +4,7 @@
 env:
   # relative path to the directory for this experiment
   exp_name: 'base_pcm_dynamic'
-  # bool flag for whether or not to use CUDA
+  # bool flag for whether to use CUDA
   use_cuda: True
   # CUDA device id, only when use_cuda == True, only single GPU is supported
   cuda_id: '0'
@@ -38,13 +38,13 @@ ckpt:
 model:
   # Positional Correct Module
   offset:
-    name: 'Mixer'
+    name: 'MLPActMixer'
     dim: 4
     depth: 2
     dropout: 0.
   # Gate Module
   gate:
-    name: 'MixerDynamic'
+    name: 'MixerDynamicGate'
     dim: 4
     depth: 2
     dropout: 0.
@@ -52,13 +52,13 @@ model:
       loss_name: 'cross_entropy'
   # Dist Transform Module
   dist:
-    name: 'DistModuleDynamic'
+    name: 'DistModule'
 
 # ====================
 # data source config
 # ====================
 data:
-  # bool flag for whether or not to shuffle training set
+  # bool flag for whether to shuffle training set
   shuffle: True
   # number of samples for each mini-batch for training
   batch_size: 128
@@ -68,22 +68,22 @@ data:
   test_batch_size: 128
   # try to use pin_memory, but if system freeze or swap being used a lot, disable it.
   pin_memory: False
-  # bool flag for whether or not to drop the last batch if no enough samples left
+  # bool flag for whether to drop the last batch if no enough samples left
   drop_last: False
   norm_rad: True
 
   train:
-    root: 'data/352_train'
+    root: 'data/train'
     name: 'Drone_train'
     index_dir: 'data/train_no_prefix.txt'
     npy_path: 'data/train.npy'
   val:
-    root: 'data/352_val'
+    root: 'data/val'
     name: 'Drone_val'
     index_dir: 'data/val_no_prefix.txt'
     npy_path: 'data/val.npy'
   test:
-    root: 'data/352_test'
+    root: 'data/test'
     name: 'Drone_test'
     index_dir: 'data/test_no_prefix.txt'
     npy_path: 'data/test.npy'

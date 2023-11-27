@@ -229,8 +229,9 @@ class ExpAgent(BaseAgent):
                 self.save_ckpt(ckpt_name)
             self.current_epoch += 1
 
-    def base_forward(self, inputs_xywh):
+    def base_forward(self, inputs_xywh, is_return_offset=False):
         B = inputs_xywh.size()[0]
+        copy_inputs = inputs_xywh.clone().detach()
 
         # inputs_xx shape: [B, 2, 1]
         # every batch contains one left x and one right x
@@ -248,9 +249,13 @@ class ExpAgent(BaseAgent):
 
         # offset_preds shape: [B, 2]
         offset_preds = torch.reshape(offset_preds, (B, -1))  # return [B, 2]
-        distance = self.dist_model(offset_preds, inputs_xx)
-
-        return distance
+        distance, left_modified_x, right_modified_x = self.dist_model(offset_preds, inputs_xx)
+        if is_return_offset:
+            copy_inputs[:, 0, 0] = left_modified_x.detach()
+            copy_inputs[:, 1, 0] = right_modified_x.detach()
+            return distance, copy_inputs
+        else:
+            return distance
 
     def train_one_epoch(self):
         """
@@ -409,7 +414,7 @@ class ExpAgent(BaseAgent):
                 curr_loss = self.loss(distance, gt_distance)
 
                 # current metrics
-                # batched_abs_rel and curr_sq_rel is calculate on average of batch.
+                # batched_abs_rel and curr_sq_rel is calculated on average of batch.
                 # batched_abs_rel : [B, ]
                 batched_abs_rel = compute_abs_rel_error(distance, gt_distance)
                 batched_sq_rel = compute_square_rel_error(distance, gt_distance)
@@ -517,7 +522,7 @@ class ExpAgent(BaseAgent):
                 curr_loss = self.loss(distance, gt_distance)
 
                 # current metrics
-                # batched_abs_rel and curr_sq_rel is calculate on average of batch.
+                # batched_abs_rel and curr_sq_rel is calculated on average of batch.
                 # batched_abs_rel : [B, ]
                 batched_abs_rel = compute_abs_rel_error(distance, gt_distance)
                 batched_sq_rel = compute_square_rel_error(distance, gt_distance)

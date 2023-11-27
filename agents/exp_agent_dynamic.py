@@ -412,7 +412,7 @@ class ExpAgent(BaseAgent):
 
             modified_inputs, distance = self.base_forward(inputs, stage=1)
             # current metrics
-            # batched_abs_rel and curr_sq_rel is calculate on average of batch.
+            # batched_abs_rel and curr_sq_rel is calculated on average of batch.
             # batched_abs_rel : [B, ]
             batched_abs_rel = compute_abs_rel_error(distance, gt_distance)
             batched_sq_rel = compute_square_rel_error(distance, gt_distance)

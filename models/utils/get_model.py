@@ -27,17 +27,18 @@ def get_model(config):
         from models.pcm.pcm import DistModuleDynamic
         model = DistModuleDynamic()
 
-    elif config.name == 'Mixer':
-        from models.pcm.pcm import MLPMixer
-        model = MLPMixer(image_size=(4, 1),
-                         channels=1,
-                         patch_size=1,
-                         dim=config.dim,
-                         depth=config.depth,
-                         dropout=config.dropout,
-                         num_classes=1)
+    elif config.name == 'MLPActMixer':
+        from models.pcm.pcm import MLPActMixer
+        model = MLPActMixer(image_size=(4, 1),
+                            channels=1,
+                            patch_size=1,
+                            dim=config.dim,
+                            depth=config.depth,
+                            dropout=config.dropout,
+                            num_classes=1,
+                            act=config.act)
 
-    elif config.name == 'MixerDynamic':
+    elif config.name == 'MixerDynamicGate':
         from models.pcm.pcm import MLPMixer
         model = MLPMixer(image_size=(4, 1),
                          channels=1,
