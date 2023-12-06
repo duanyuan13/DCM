@@ -2,7 +2,7 @@
 
 This repository is the official implementation of "Revisting Stereo Triangulation in UAV Distance Estimation". It is designed for efficient UAV target distance estimation.
 
-[Paper](https://arxiv.org/abs/2306.08939) | [Project Page](https://duanyuan13.github.io/UAVDE.html) | [YouTube]() | [BibeTex](#citation)
+[Paper](https://arxiv.org/abs/2306.08939) | [Dataset Page](https://duanyuan13.github.io/UAVDE.html) | [BibeTex](#citation)
 
 ### Demo of Base Position Correction Module
 
@@ -67,8 +67,8 @@ UAV_Dataset
 ## Citation
 ```
 @misc{zhuang2023does,
-      title={Why does Stereo Triangulation Not Work in UAV Distance Estimation}, 
-      author={Jiafan Zhuang and Duan Yuan and Rihong Yan and Xiangyu Dong and Yutao Zhou and Weixin Huang and Zhun Fan},
+      title={Revisiting Stereo Triangulation in UAV Distance Estimation}, 
+      author={Jiafan Zhuang and Duan Yuan and Rihong Yan and Weixin Huang and Zhun Fan},
       year={2023},
       eprint={2306.08939},
       archivePrefix={arXiv},
