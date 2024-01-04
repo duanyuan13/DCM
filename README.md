@@ -68,7 +68,7 @@ UAV_Dataset
 ```
 @misc{zhuang2023does,
       title={Revisiting Stereo Triangulation in UAV Distance Estimation}, 
-      author={Jiafan Zhuang and Duan Yuan and Rihong Yan and Weixin Huang and Zhun Fan},
+      author={Jiafan Zhuang and Duan Yuan and Rihong Yan and Weixin Huang and Wenji Li and Zhun Fan},
       year={2023},
       eprint={2306.08939},
       archivePrefix={arXiv},
